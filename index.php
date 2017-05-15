@@ -6,6 +6,7 @@
   <title>Main page</title>
 </head>
 <body>
+  <?php include 'includes/menu.php'; ?>
   <div class="container">
     <div class="page-header">
       <p>Index page</p>
