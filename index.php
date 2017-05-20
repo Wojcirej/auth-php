@@ -1,3 +1,6 @@
+<?php
+include 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="eng">
 <head>
@@ -6,7 +9,7 @@
   <title>Main page</title>
 </head>
 <body>
-  <?php include 'includes/menu.php'; ?>
+  <?php include $root.'includes/menu.php'; ?>
   <div class="container">
     <div class="page-header">
       <p>Index page</p>

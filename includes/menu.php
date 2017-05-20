@@ -66,7 +66,7 @@ if (!empty($login)) {
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/login.php">Login</a></li>
-            <li><a href="/register.php">Register</a></li>
+            <li><a href="/view/register.php">Register</a></li>
           </ul>
         </div>
       </div>
