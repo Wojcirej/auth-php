@@ -5,7 +5,7 @@ class Database {
   public static function getInstance() {
     if (!self::$db) {
       try {
-        self::$db = new PDO('mysql:host=localhost;dbname=users-auth;charset=utf8','root','majus');
+        self::$db = new PDO('mysql:host=localhost;dbname=users-auth;charset=utf8','root','');
       }
       catch(PDOException $e){
         return null;
@@ -54,6 +54,24 @@ class Database {
   public static function getUserByEmail($email) {
     $stmt = self::$db->prepare('SELECT * FROM accounts WHERE EMAIL=?');
     $stmt->execute(array($email));
+    if ($stmt->rowCount() > 0) {
+      $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $result = $results[0];
+      $user = new Account();
+      $user->setId($result['ID']);
+      $user->setFirstName($result['FIRST_NAME']);
+      $user->setLastName($result['LAST_NAME']);
+      $user->setEmail($result['EMAIL']);
+      $user->setLogin($result['LOGIN']);
+      $user->setPassword($result['PASSWORD']);
+      $user->setRole($result['ROLE']);
+      return $user;
+    }
+  }
+
+  public static function getUserByLoginAndPassword($login, $password) {
+    $stmt = self::$db->prepare('SELECT * FROM accounts WHERE LOGIN=? and PASSWORD=?');
+    $stmt->execute(array($login, sha1($password)));
     if ($stmt->rowCount() > 0) {
       $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $result = $results[0];

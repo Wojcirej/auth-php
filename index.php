@@ -12,7 +12,12 @@ include 'config.php';
   <?php include $root.'includes/menu.php'; ?>
   <div class="container">
     <div class="page-header">
-      <p>Index page</p>
+      <?php
+      if(isset($_SESSION['user'])) { ?>
+        <p>Logged as <?= $_SESSION['user'] ?></p>
+      <?php
+      }
+      ?>
     </div>
   </div>
 </body>

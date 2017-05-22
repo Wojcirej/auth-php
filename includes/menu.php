@@ -1,8 +1,8 @@
 <?php
 $login = $_SESSION['user'];
+$role = $_SESSION['role'];
 if (!empty($login)) {
-  $db = Database::getInstance();
-  if ($db::isUserInRole($login, 'admin')) {
+  if ($role == 'admin') {
     ?>
     <!-- admin -->
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -18,15 +18,14 @@ if (!empty($login)) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Index</a></li>
             <li><a href="/admin.php">Admin Panel</a></li>
-            <li><a href="/logout.php">Logout</a></li>
+            <li><a href="/view/logout.php">Logout</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <?php
-  } else if ($db::isUserInRole($login, 'user')) {
+  } else if ($role == 'user') {
     ?>
     <!--user-->
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -43,7 +42,7 @@ if (!empty($login)) {
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/profile.php">Profile</a></li>
-            <li><a href="/logout.php">Logout</a></li>
+            <li><a href="/view/logout.php">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -65,7 +64,7 @@ if (!empty($login)) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/login.php">Login</a></li>
+            <li><a href="/view/login.php">Login</a></li>
             <li><a href="/view/register.php">Register</a></li>
           </ul>
         </div>
