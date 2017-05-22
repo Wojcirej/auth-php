@@ -3,6 +3,16 @@ include $root.'/app/Database.class.php';
 include $root.'/model/Account.class.php';
 class AccountController {
 
+  public static function isUserLoginAlreadyExists($login) {
+    $user = Database::getUserByLogin($login);
+    return !empty($user);
+  }
+
+  public static function isEmailAlreadyExists($email) {
+    $user = Database::getUserByEmail($email);
+    return !empty($user);
+  }
+
   public static function register() {
     $error = "";
     $db = Database::getInstance();
@@ -30,6 +40,12 @@ class AccountController {
       if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $error .= "<li>Email address is incorrect.</li>";
       }
+      if(AccountController::isUserLoginAlreadyExists($login)){
+        $error .= "<li>Account with login ".$login." already exists.</li>";
+      }
+      if(AccountController::isEmailAlreadyExists($email)){
+        $error .= "<li>Email ".$email." is already in use.</li>";
+      }
 
       if(empty($error)){
         $account = new Account();
@@ -51,4 +67,4 @@ class AccountController {
     }
   }
 }
- ?>
+?>
