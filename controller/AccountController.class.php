@@ -73,7 +73,8 @@ class AccountController {
       $password = trim($_POST['password']);
       $db = Database::getInstance();
       if($db == null){
-        $_SESSION['error'] = "Connection with database cannot be established, try again later.";
+        $_SESSION['error'] .= "Connection with database cannot be established, try again later.";
+        header("Location: /view/login.php");
       }
       $user = $db::getUserByLoginAndPassword($login, $password);
       if (!empty($user)) {
@@ -91,6 +92,55 @@ class AccountController {
   public static function logout() {
     session_destroy();
     header("Location: /index.php");
+  }
+
+  public static function edit($id) {
+    $error = "";
+    $db = Database::getInstance();
+    if($db == null){
+      $_SESSION['error'] = "Connection with database cannot be established, try again later.";
+      return 0;
+    }
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $login = trim($_POST['login']);
+      $password = trim($_POST['password']);
+      $password2 = trim($_POST['password2']);
+      $firstName = trim($_POST['firstName']);
+      $lastName = trim($_POST['lastName']);
+      $email = trim($_POST['email']);
+
+      if(empty($login)){
+        $error .= "<li>Please enter login.</li>";
+      }
+      if(empty($password)){
+        $error .= "<li>Please enter password.</li>";
+      }
+      if(strcmp($password, $password2)){
+        $error .= "<li>Passwords don't match.</li>";
+      }
+      if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $error .= "<li>Email address is incorrect.</li>";
+      }
+
+      if(empty($error)){
+        $account = new Account();
+        $account->setId($id);
+        $account->setLogin($login);
+        $account->setPassword($password);
+        $account->setFirstName($firstName);
+        $account->setLastName($lastName);
+        $account->setEmail($email);
+        $account->setRole("user");
+        return $db::editUser($account);
+      }
+      else{
+        $_SESSION['error'] = "Following errors occured during edition:";
+        $_SESSION['error'] .= "<ul>";
+        $_SESSION['error'] .= $error;
+        $_SESSION['error'] .= "</ul>";
+        return 0;
+      }
+    }
   }
 }
 ?>

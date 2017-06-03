@@ -15,7 +15,7 @@ class Database {
   }
 
   public static function addUser($user) {
-    try{
+    try {
       $stmt = self::$db->prepare("INSERT INTO accounts (ID,LOGIN,PASSWORD,FIRST_NAME,LAST_NAME,EMAIL,ROLE) "
       . "VALUES(null,:login,:password,:firstName,:lastName,:email,:role)");
       $stmt->execute(array(
@@ -85,6 +85,27 @@ class Database {
       $user->setRole($result['ROLE']);
       return $user;
     }
+  }
+
+  public static function editUser($user) {
+    $stmt = self::$db->prepare("UPDATE accounts SET
+      LOGIN = :login,
+      PASSWORD = :password,
+      FIRST_NAME = :firstName,
+      LAST_NAME = :lastName,
+      EMAIL = :email,
+      ROLE = :role
+      WHERE ID = :id");
+    $stmt->execute(array(
+      ':firstName' => $user->getFirstName(),
+      ':lastName' => $user->getLastName(),
+      ':email' => $user->getEmail(),
+      ':login' => $user->getLogin(),
+      ':password' => sha1($user->getPassword()),
+      ':role' => $user->getRole(),
+      ':id' => $user->getId())
+    );
+    return $stmt->rowCount();
   }
 }
 ?>
