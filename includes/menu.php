@@ -18,7 +18,7 @@ if (!empty($login)) {
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/admin.php">Admin Panel</a></li>
+            <li><a href="/view/admin.php">Admin Panel</a></li>
             <li><a href="/view/profile.php">Your profile</a></li>
             <li><a href="/app/logout.php">Logout</a></li>
           </ul>

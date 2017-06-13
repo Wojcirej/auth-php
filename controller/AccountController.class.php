@@ -142,5 +142,46 @@ class AccountController {
       }
     }
   }
+
+  public static function editAsAdmin($id) {
+    $error = "";
+    $db = Database::getInstance();
+    if($db == null){
+      $_SESSION['error'] = "Connection with database cannot be established, try again later.";
+      return 0;
+    }
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $login = trim($_POST['login']);
+      $firstName = trim($_POST['firstName']);
+      $lastName = trim($_POST['lastName']);
+      $email = trim($_POST['email']);
+      $role = trim($_POST['role']);
+
+      if(empty($login)){
+        $error .= "<li>Please enter login.</li>";
+      }
+      if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $error .= "<li>Email address is incorrect.</li>";
+      }
+
+      if(empty($error)){
+        $account = new Account();
+        $account->setId($id);
+        $account->setLogin($login);
+        $account->setFirstName($firstName);
+        $account->setLastName($lastName);
+        $account->setEmail($email);
+        $account->setRole($role);
+        return $db::editUserAsAdmin($account);
+      }
+      else{
+        $_SESSION['error'] = "Following errors occured during edition:";
+        $_SESSION['error'] .= "<ul>";
+        $_SESSION['error'] .= $error;
+        $_SESSION['error'] .= "</ul>";
+        return 0;
+      }
+    }
+  }
 }
 ?>
