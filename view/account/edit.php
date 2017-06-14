@@ -24,7 +24,7 @@ else {
     <div class="page-header">
       Edit your profile (confirm changes by typing password, new or current one)
     </div>
-    <form method="POST" action="/app/edit_success.php">
+    <form method="POST" action="/app/account/edit.php">
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
@@ -69,7 +69,7 @@ else {
         <div class="btn-group">
           <button type="submit" class="btn btn-default">Edit</button>
           <button type="reset" class="btn btn-default">Reset</button>
-          <a href="/view/profile.php" class="btn btn-default">Back to profile</a>
+          <a href="/view/account/profile.php" class="btn btn-default">Back to profile</a>
         </div>
       </div>
     </form>

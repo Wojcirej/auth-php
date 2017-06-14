@@ -15,7 +15,7 @@ $root = $_SESSION['root'];
     <div class="page-header">
       Create account
     </div>
-    <form method="POST" action="/app/register_success.php">
+    <form method="POST" action="/app/account/register.php">
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">

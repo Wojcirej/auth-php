@@ -9,6 +9,6 @@ if($rowCount == 1){
 }
 else if($rowCount == 0){
   $_SESSION['error'] .= $error;
-  header('Location: /view/edit_profile.php');
+  header('Location: /view/account/edit.php');
 }
 ?>

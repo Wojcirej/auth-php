@@ -22,9 +22,6 @@ if(!isset($_SESSION['user']) || ( !isset($_SESSION['role']) || $_SESSION['role']
       <div class="col-sm-1">
         <a href="/view/admin/user_list.php" class="btn btn-default btn-sm">List of users</a>
       </div>
-      <div class="col-sm-1">
-        <a href="/view/admin/admin_list.php" class="btn btn-default btn-sm">List of admins</a>
-      </div>
     </div>
   </div>
 </body>

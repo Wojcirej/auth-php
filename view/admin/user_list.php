@@ -47,7 +47,7 @@ $users = Database::getInstance()::getAllUsers();
          ?>
       </tbody>
     </table>
-    <a href="/view/admin.php" class="btn btn-info">Back to admin index</a>
+    <a href="/view/admin/admin.php" class="btn btn-info">Back to admin index</a>
     <div class="row">
       <div class="col-sm-4">
         <?php

@@ -24,7 +24,7 @@ else {
     <div class="page-header">
       Edit user profile (confirm changes by typing password, new or current one)
     </div>
-    <form method="POST" action="/app/admin/edit_success.php">
+    <form method="POST" action="/app/admin/edit.php">
       <div class="row">
         <div class="col-sm-2">
           <div class="form-group">

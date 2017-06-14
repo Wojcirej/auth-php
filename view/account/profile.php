@@ -40,7 +40,7 @@ else {
     </div>
     <div class="row">
       <div class="col-sm-3">
-        <a href="/view/edit_profile.php" class="btn btn-default">Edit profile</a>
+        <a href="/view/account/edit.php" class="btn btn-default">Edit profile</a>
       </div>
     </div>
   </div>
