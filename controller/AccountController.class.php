@@ -183,5 +183,20 @@ class AccountController {
       }
     }
   }
+
+  public static function deleteAsAdmin($id) {
+    $error = "";
+    $db = Database::getInstance();
+    if($db == null) {
+      $_SESSION['error'] = "Connection with database cannot be established, try again later.";
+      return 0;
+    }
+    $user = $db::getUserById($id);
+    if($user->getLogin() == $_SESSION['user']) {
+      $_SESSION['error'] .= "Can't delete your own account!";
+      return 0;
+    }
+    return $db::deleteUserById($id);
+  }
 }
 ?>

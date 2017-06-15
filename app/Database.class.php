@@ -5,7 +5,7 @@ class Database {
   public static function getInstance() {
     if (!self::$db) {
       try {
-        self::$db = new PDO('mysql:host=localhost;dbname=users-auth;charset=utf8','root','');
+        self::$db = new PDO('mysql:host=localhost;dbname=users-auth;charset=utf8','root','majus');
       }
       catch(PDOException $e){
         return null;
@@ -160,6 +160,12 @@ class Database {
       ':role' => $user->getRole(),
       ':id' => $user->getId())
     );
+    return $stmt->rowCount();
+  }
+
+  public static function deleteUserById($id) {
+    $stmt = self::$db->prepare("DELETE FROM accounts WHERE ID=?");
+    $stmt->execute(array($id));
     return $stmt->rowCount();
   }
 }
